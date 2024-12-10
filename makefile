@@ -35,7 +35,7 @@ build/check_build.tmp:$(PATCHES)
 	[ -d 'build' ] || mkdir build
 	@if [ -f '.stamp_extracted' ] ; then \
 		[ -f '../../../dl/u-boot-2020.04.tar.bz2' ] || wget --passive-ftp -nd -t 3 -O '../../../dl/u-boot-2020.04.tar.bz2' 'https://ftp.denx.de/pub/u-boot/u-boot-2020.04.tar.bz2' ; \
-		[ -d '../../../dl/u-boot-2020.04.tar.bz2' ] || tar xjf ../../../dl/u-boot-2020.04.tar.bz2 -C build/ ; \
+		[ -d 'build/u-boot-2020.04' ] || tar xjf ../../../dl/u-boot-2020.04.tar.bz2 -C build/ ; \
 	else \
 		[ -f '.u-boot-2020.04.tar.bz2' ] || wget --passive-ftp -nd -t 3 -O '.u-boot-2020.04.tar.bz2' 'https://ftp.denx.de/pub/u-boot/u-boot-2020.04.tar.bz2' ; \
 		[ -d 'build/u-boot-2020.04' ] || tar xjf .u-boot-2020.04.tar.bz2 -C build/ ; \
