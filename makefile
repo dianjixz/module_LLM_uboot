@@ -15,7 +15,7 @@ KERNEL_MAKE := cd $(SRC_DIR) ; $(MAKE)
 %:
 	@if [ "$(MAKECMDGOALS)" != "build_init" ] ; then \
 		$(MAKE) build_init ; \
-		$(KERNEL_MAKE) $(MAKECMDGOALS) ; \
+		$(KERNEL_MAKE) dtb-y=m5stack-ax630c-module-llm.dtb EXTRA_CFLAGS=-DUBOOT_IMG_HEADER_BASE=0x5C000000 DEVICE_TREE=m5stack-ax630c-module-llm  $(MAKECMDGOALS) ; \
 		if [ -f "u-boot" ] ; then cp u-boot* ../.. ; fi ; \
 	fi
 

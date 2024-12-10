@@ -3,3 +3,4 @@ build
 .config
 u-boot
 u-boot.*
+u-boot*.bin
