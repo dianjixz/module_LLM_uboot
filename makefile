@@ -51,6 +51,7 @@ build/check_patch.tmp:$(PATCHES)
 
 build/check_config.tmp:$(CONFIG_FILES)
 	[ -f '$(SRC_DIR)/.config' ] || $(KERNEL_MAKE) AX630C_m5stack_LLM_module_defconfig
+	[ -L '.config' ] || ln -s $(SRC_DIR)/.config .config
 	touch build/check_config.tmp
 
 distclean:
