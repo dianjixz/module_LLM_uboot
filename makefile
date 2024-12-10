@@ -16,6 +16,7 @@ KERNEL_MAKE := cd $(SRC_DIR) ; $(MAKE)
 	@if [ "$(MAKECMDGOALS)" != "build_init" ] ; then \
 		$(MAKE) build_init ; \
 		$(KERNEL_MAKE) $(MAKECMDGOALS) ; \
+		cp u-boot* ../.. ; \
 	fi
 
 build_init:Configuring
