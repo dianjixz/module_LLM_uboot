@@ -8,12 +8,12 @@ PATCHES := $(wildcard patches/*.patch)
 DTSS := $(wildcard uboot-dts/*.dts*)
 CONFIG_FILES := $(wildcard *.config)
 
-AX630C_KERNEL_PARAM := ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- 
+# AX630C_KERNEL_PARAM := ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- 
+# KERNEL_MAKE := cd $(SRC_DIR) ; $(MAKE) $(AX630C_KERNEL_PARAM)
 
-KERNEL_MAKE := cd $(SRC_DIR) ; $(MAKE) $(AX630C_KERNEL_PARAM)
-
+KERNEL_MAKE := cd $(SRC_DIR) ; $(MAKE) 
 %:
-	@ if [ "$(MAKECMDGOALS)" != "build_init" ] ; then \
+	@if [ "$(MAKECMDGOALS)" != "build_init" ] ; then \
 		$(MAKE) build_init ; \
 		$(KERNEL_MAKE) dtb-y=m5stack-ax630c-module-llm.dtb DEVICE_TREE=m5stack-ax630c-module-llm EXTRA_CFLAGS=-DUBOOT_IMG_HEADER_BASE=0x5C000000 $(MAKECMDGOALS) ; \
 	fi
