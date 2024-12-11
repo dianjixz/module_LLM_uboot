@@ -5,6 +5,7 @@ Compilation will automatically download and apply the relevant patches to compil
 
 auto compile:
 ```bash
+make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- AX630C_m5stack_LLM_module_defconfig
 make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- -j `nproc`
 ```
 

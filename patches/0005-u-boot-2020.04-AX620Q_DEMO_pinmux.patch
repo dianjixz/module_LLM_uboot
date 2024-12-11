@@ -168,14 +168,14 @@
 +0x02303084, 0x00000000,  /* PadName = CDRX_L5N             Fuction = CDRX_L5N */
 +0x02303090, 0x00000000,  /* PadName = CDRX_L5P             Fuction = CDRX_L5P */
 \ 文件尾没有换行符
---- a/board/axera/ax620e_emmc/AX630C_DEMO_pinmux.h	2024-12-04 15:27:37.982760570 +0800
-+++ b/board/axera/ax620e_emmc/AX630C_DEMO_pinmux.h	2024-12-04 15:27:35.134686413 +0800
+--- a/board/axera/ax620e_emmc/AX630C_EVB_pinmux.h	2024-12-04 15:27:37.982760570 +0800
++++ b/board/axera/ax620e_emmc/AX630C_EVB_pinmux.h	2024-12-04 15:27:35.134686413 +0800
 @@ -0,0 +1,111 @@
 +0x0230000C, 0x00020003,  /* PadName = VI_D0                Fuction = SPI_m1_MOSI */
-+0x02300018, 0x00020003,  /* PadName = VI_D1                Fuction = SPI_m1_MISO */
++0x02300018, 0x00060083,  /* PadName = VI_D1                Fuction = GPIO_0_A1 */
 +0x02300024, 0x00020003,  /* PadName = VI_D2                Fuction = SPI_m1_CS0 */
 +0x02300030, 0x00060083,  /* PadName = VI_D3                Fuction = GPIO_0_A3 */
-+0x0230003C, 0x00020003,  /* PadName = VI_D4                Fuction = SPI_m1_SCLK */
++0x0230003C, 0x00060083,  /* PadName = VI_D4                Fuction = GPIO_0_A4 */
 +0x02300048, 0x00060083,  /* PadName = VI_D5                Fuction = GPIO_0_A5 */
 +0x02300054, 0x00000003,  /* PadName = VI_D6                Fuction = VI_D6 */
 +0x02300060, 0x00000003,  /* PadName = VI_D7                Fuction = VI_D7 */
@@ -283,8 +283,8 @@
 +0x02303084, 0x00000000,  /* PadName = CDRX_L5N             Fuction = CDRX_L5N */
 +0x02303090, 0x00000000,  /* PadName = CDRX_L5P             Fuction = CDRX_L5P */
 \ 文件尾没有换行符
---- a/board/axera/ax620e_emmc/AX630C_EVB_pinmux.h	2024-12-04 15:28:36.340263592 +0800
-+++ b/board/axera/ax620e_emmc/AX630C_EVB_pinmux.h	2024-12-04 15:28:33.728196963 +0800
+--- a/board/axera/ax620e_emmc/AX630C_DEMO_pinmux.h	2024-12-04 15:28:36.340263592 +0800
++++ b/board/axera/ax620e_emmc/AX630C_DEMO_pinmux.h	2024-12-04 15:28:33.728196963 +0800
 @@ -0,0 +1,111 @@
 +0x0230000C, 0x00020003,  /* PadName = VI_D0                Fuction = SPI_m1_MOSI */
 +0x02300018, 0x00060083,  /* PadName = VI_D1                Fuction = GPIO_0_A1 */

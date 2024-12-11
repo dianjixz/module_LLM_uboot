@@ -7,7 +7,7 @@ SRC_DIR := build/u-boot-2020.04
 PATCHES := $(wildcard patches/*.patch)
 DTSS := $(wildcard uboot-dts/*.dts*)
 CONFIG_FILES := $(wildcard *.config)
-
+UBOOT_TAR_SHA := fe732aaf037d9cc3c0909bad8362af366ae964bbdac6913a34081ff4ad565372
 # AX630C_KERNEL_PARAM := ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- 
 # KERNEL_MAKE := cd $(SRC_DIR) ; $(MAKE) $(AX630C_KERNEL_PARAM)
 
@@ -35,9 +35,19 @@ build/check_build.tmp:$(PATCHES)
 	[ -d 'build' ] || mkdir build
 	@if [ -f '.stamp_extracted' ] ; then \
 		[ -f '../../../dl/u-boot-2020.04.tar.bz2' ] || wget --passive-ftp -nd -t 3 -O '../../../dl/u-boot-2020.04.tar.bz2' 'https://ftp.denx.de/pub/u-boot/u-boot-2020.04.tar.bz2' ; \
+		calculated_hash=$$(sha256sum ../../../dl/u-boot-2020.04.tar.bz2 | awk '{ print $$1 }'); \
+		if [ "$$calculated_hash" != "$(UBOOT_TAR_SHA)" ]; then \
+			rm ../../../dl/u-boot-2020.04.tar.bz2 ; \
+			exit 1; \
+		fi ; \
 		[ -d 'build/u-boot-2020.04' ] || tar xjf ../../../dl/u-boot-2020.04.tar.bz2 -C build/ ; \
 	else \
 		[ -f '.u-boot-2020.04.tar.bz2' ] || wget --passive-ftp -nd -t 3 -O '.u-boot-2020.04.tar.bz2' 'https://ftp.denx.de/pub/u-boot/u-boot-2020.04.tar.bz2' ; \
+		calculated_hash=$$(sha256sum .u-boot-2020.04.tar.bz2 | awk '{ print $$1 }') ; \
+		if [ "$$calculated_hash" != "$(UBOOT_TAR_SHA)" ]; then \
+			rm .u-boot-2020.04.tar.bz2 ; \
+			exit 1; \
+		fi ; \
 		[ -d 'build/u-boot-2020.04' ] || tar xjf .u-boot-2020.04.tar.bz2 -C build/ ; \
 	fi
 	@touch build/check_build.tmp
@@ -56,8 +66,6 @@ build/check_patch.tmp:$(PATCHES)
 	@touch build/check_patch.tmp
 
 build/check_config.tmp:$(CONFIG_FILES)
-	[ -f '$(SRC_DIR)/.config' ] || $(KERNEL_MAKE) AX630C_m5stack_LLM_module_defconfig
-	[ -L '.config' ] || ln -s $(SRC_DIR)/.config .config
 	touch build/check_config.tmp
 
 distclean:
