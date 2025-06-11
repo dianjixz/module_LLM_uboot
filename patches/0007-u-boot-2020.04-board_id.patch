@@ -1,0 +1,94 @@
+--- a/arch/arm/include/asm/arch-axera/boot_mode.h	2025-06-11 17:06:27.517039004 +0800
++++ b/arch/arm/include/asm/arch-axera/boot_mode.h	2025-06-11 17:06:22.788947495 +0800
+@@ -55,6 +55,7 @@
+ 	PHY_AX630C_SLT_V1_0 = 8,
+ 	PHY_AX630C_DEMO_V1_1 = 6,
+ 	PHY_AX630C_DEMO_LP4_V1_0 = 12,
++	PHY_AX630C_DEMO_LP4_V1_1 = 14,
+ } ax630c_board_type_e;
+ 
+ typedef enum ax620q_board_type {
+@@ -78,6 +79,7 @@
+ 	AX630C_DEMO_LP4_V1_0,
+ 	AX620Q_LP4_38BOARD_V1_0,
+ 	AX620Q_LP4_MINION_BOARD,
++	AX630C_DEMO_LP4_V1_1,
+ 	AX620E_BOARD_MAX,
+ } board_type_e;
+ 
+--- a/arch/arm/mach-axera/ax620e/board.c	2025-06-11 17:06:52.625524968 +0800
++++ b/arch/arm/mach-axera/ax620e/board.c	2025-06-11 17:06:35.889201044 +0800
+@@ -66,6 +66,7 @@
+ 	[AX630C_CHIP][PHY_AX630C_SLT_V1_0] = "AX630C_SLT_V1_0",
+ 	[AX630C_CHIP][PHY_AX630C_DEMO_V1_1] = "AX630C_DEMO_V1_1",
+ 	[AX630C_CHIP][PHY_AX630C_DEMO_LP4_V1_0] = "AX630C_DEMO_LP4_V1_0",
++	[AX630C_CHIP][PHY_AX630C_DEMO_LP4_V1_1] = "AX630C_DEMO_LP4_V1_1",
+ };
+ 
+ static unsigned char ax_board_id[5][16] = {
+@@ -89,6 +90,7 @@
+ 	[AX630C_CHIP][PHY_AX630C_SLT_V1_0] = AX630C_SLT_V1_0,
+ 	[AX630C_CHIP][PHY_AX630C_DEMO_V1_1] = AX630C_DEMO_V1_1,
+ 	[AX630C_CHIP][PHY_AX630C_DEMO_LP4_V1_0] = AX630C_DEMO_LP4_V1_0,
++	[AX630C_CHIP][PHY_AX630C_DEMO_LP4_V1_1] = AX630C_DEMO_LP4_V1_1,
+ };
+ static const char * chip_type[AX620E_CHIP_MAX] = {
+ 	[AX620Q_CHIP] = "AX620Q_CHIP",
+@@ -164,6 +166,7 @@
+ 
+ 	//ephy led pol
+ 	if (misc_info->board_id == AX630C_DEMO_LP4_V1_0 ||
++		misc_info->board_id == AX630C_DEMO_LP4_V1_1 ||
+ 		misc_info->board_id == AX630C_DEMO_V1_1 ||
+ 		misc_info->board_id == AX620Q_LP4_DEMO_V1_1
+ 	) {
+--- a/board/axera/ax620e_Qnand/pinmux.c	2025-06-11 17:07:44.354526174 +0800
++++ b/board/axera/ax620e_Qnand/pinmux.c	2025-06-11 17:07:41.526471437 +0800
+@@ -56,6 +56,7 @@
+ 
+ 	switch (index) {
+ 	case AX630C_DEMO_LP4_V1_0:
++	case AX630C_DEMO_LP4_V1_1:
+ 	case AX630C_DEMO_V1_1:
+ 		ret = AX630C_DEMO_V1_0;
+ 		break;
+--- a/board/axera/ax620e_emmc/pinmux.c	2025-06-11 17:07:06.001783860 +0800
++++ b/board/axera/ax620e_emmc/pinmux.c	2025-06-11 17:07:02.145709228 +0800
+@@ -56,6 +56,7 @@
+ 
+ 	switch (index) {
+ 	case AX630C_DEMO_LP4_V1_0:
++	case AX630C_DEMO_LP4_V1_1:
+ 	case AX630C_DEMO_V1_1:
+ 		ret = AX630C_DEMO_V1_0;
+ 		break;
+--- a/board/axera/ax620e_haps/pinmux.c	2025-06-11 17:07:15.521968122 +0800
++++ b/board/axera/ax620e_haps/pinmux.c	2025-06-11 17:07:12.257904947 +0800
+@@ -70,6 +70,7 @@
+ 
+ 	switch (index) {
+ 	case AX630C_DEMO_LP4_V1_0:
++	case AX630C_DEMO_LP4_V1_1:
+ 	case AX630C_DEMO_V1_1:
+ 		ret = AX630C_DEMO_V1_0;
+ 		break;
+--- a/board/axera/ax620e_nand/pinmux.c	2025-06-11 17:07:24.590143635 +0800
++++ b/board/axera/ax620e_nand/pinmux.c	2025-06-11 17:07:21.638086499 +0800
+@@ -56,6 +56,7 @@
+ 
+ 	switch (index) {
+ 	case AX630C_DEMO_LP4_V1_0:
++	case AX630C_DEMO_LP4_V1_1:
+ 	case AX630C_DEMO_V1_1:
+ 		ret = AX630C_DEMO_V1_0;
+ 		break;
+--- a/board/axera/ax620e_nor/pinmux.c	2025-06-11 17:07:35.158348183 +0800
++++ b/board/axera/ax620e_nor/pinmux.c	2025-06-11 17:07:32.158290116 +0800
+@@ -56,6 +56,7 @@
+ 
+ 	switch (index) {
+ 	case AX630C_DEMO_LP4_V1_0:
++	case AX630C_DEMO_LP4_V1_1:
+ 	case AX630C_DEMO_V1_1:
+ 		ret = AX630C_DEMO_V1_0;
+ 		break;
